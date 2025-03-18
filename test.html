@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Futurenaut.co - Space Explorer Hero Example</title>
+  <style>
+    :root {
+      /* Deep Space Explorer Theme */
+      --color-background: #080A1A;
+      --color-primary: #1A1B4B;
+      --color-secondary: #7B68EE;
+      --color-accent: #4BBEFF;
+      --color-text: #F2F3FF;
+      
+      /* Font settings */
+      --font-heading: 'Space Grotesk', 'Exo 2', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --letter-spacing-wide: 0.15em;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background-color: var(--color-background);
+      color: var(--color-text);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    .space-container {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .stars {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, #ffffff, rgba(0,0,0,0));
+      background-repeat: repeat;
+      background-size: 200px 200px;
+      animation: twinkle 4s ease-in-out infinite;
+      opacity: 0.4;
+    }
+    
+    @keyframes twinkle {
+      0% { opacity: 0.4; }
+      50% { opacity: 0.6; }
+      100% { opacity: 0.4; }
+    }
+    
+    .nebula {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(
+        ellipse at center,
+        rgba(123, 104, 238, 0.2) 0%,
+        rgba(26, 27, 75, 0.1) 40%,
+        rgba(8, 10, 26, 0) 70%
+      );
+      filter: blur(20px);
+      transform: translateZ(0);
+      pointer-events: none;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    .mission-status {
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: var(--letter-spacing-wide);
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .mission-status::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--color-accent);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+    
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      background: linear-gradient(to right, var(--color-text), var(--color-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .hero-subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 400;
+      max-width: 650px;
+      margin-bottom: 2.5rem;
+      opacity: 0.9;
+    }
+    
+    .hero-cta {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+      color: var(--color-text);
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .hero-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transition: all 0.6s;
+    }
+    
+    .hero-cta:hover::before {
+      left: 100%;
+    }
+    
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .navigation {
+      position: absolute;
+      top: 30px;
+      right: 50px;
+      z-index: 20;
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-item {
+      color: var(--color-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: var(--letter-spacing-wide);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--color-accent);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-item:hover::after {
+      width: 100%;
+    }
+    
+    .logo {
+      position: absolute;
+      top: 30px;
+      left: 50px;
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: var(--letter-spacing-wide);
+      z-index: 20;
+      text-decoration: none;
+      color: var(--color-text);
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+    }
+    
+    .scroll-indicator:hover {
+      opacity: 1;
+    }
+    
+    .scroll-text {
+      font-size: 0.8rem;
+      letter-spacing: var(--letter-spacing-wide);
+      text-transform: uppercase;
+    }
+    
+    .scroll-icon {
+      width: 30px;
+      height: 50px;
+      border: 2px solid var(--color-text);
+      border-radius: 15px;
+      position: relative;
+    }
+    
+    .scroll-icon::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background-color: var(--color-text);
+      border-radius: 50%;
+      animation: scrollDown 2s infinite;
+    }
+    
+    @keyframes scrollDown {
+      0% { opacity: 1; transform: translate(-50%, 0); }
+      80% { opacity: 0; transform: translate(-50%, 20px); }
+      100% { opacity: 0; transform: translate(-50%, 0); }
+    }
+    
+    /* Custom cursor */
+    .custom-cursor {
+      position: fixed;
+      width: 40px;
+      height: 40px;
+      border: 2px solid var(--color-accent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 9999;
+      mix-blend-mode: difference;
+      transition: all 0.1s ease;
+      display: none;
+    }
+    
+    @media (min-width: 1024px) {
+      .custom-cursor {
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom cursor for desktop -->
+  <div class="custom-cursor"></div>
+
+  <div class="space-container">
+    <!-- Background stars effect -->
+    <div class="stars"></div>
+    
+    <!-- Nebula background effect -->
+    <div class="nebula"></div>
+    
+    <!-- Navigation -->
+    <a href="#" class="logo">FUTURENAUT</a>
+    <nav class="navigation">
+      <a href="#" class="nav-item">Mission</a>
+      <a href="#" class="nav-item">Captain</a>
+      <a href="#" class="nav-item">Projects</a>
+      <a href="#" class="nav-item">Contact</a>
+    </nav>
+    
+    <!-- Hero content -->
+    <div class="hero-content">
+      <div class="mission-status">Mission Status: Active</div>
+      <h1 class="hero-title">Welcome to the Future</h1>
+      <p class="hero-subtitle">Navigating the galaxies of Crypto, AI, and Digital Freedom. Join the journey of working smart, not hard.</p>
+      <a href="#" class="hero-cta">Begin Exploration</a>
+    </div>
+    
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span class="scroll-text">Scroll to explore</span>
+      <div class="scroll-icon"></div>
+    </div>
+  </div>
+
+  <script>
+    // Custom cursor
+    document.addEventListener('DOMContentLoaded', () => {
+      const cursor = document.querySelector('.custom-cursor');
+      
+      document.addEventListener('mousemove', (e) => {
+        cursor.style.left = `${e.clientX}px`;
+        cursor.style.top = `${e.clientY}px`;
+      });
+      
+      document.addEventListener('mousedown', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+        cursor.style.borderWidth = '3px';
+      });
+      
+      document.addEventListener('mouseup', () => {
+        cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        cursor.style.borderWidth = '2px';
+      });
+      
+      // Enhance hover effect on interactive elements
+      const interactiveElements = document.querySelectorAll('a, button');
+      
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+          cursor.style.mixBlendMode = 'normal';
+          cursor.style.backgroundColor = 'rgba(75, 190, 255, 0.1)';
+        });
+        
+        el.addEventListener('mouseleave', () => {
+          cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursor.style.mixBlendMode = 'difference';
+          cursor.style.backgroundColor = 'transparent';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
