@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# === Captain Wenzel's Custom Ignore Rules ===
+/progress_md/
+/gfx/storage/
+
 # User-specific files
 *.rsuser
 *.suo
