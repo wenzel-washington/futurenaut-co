@@ -31,3 +31,4 @@ With the help of ChatGPT (GPT-4 Turbo, April 2025), I'm using a space exploratio
 - [ ] Style projects/index.html for better UX
 - [ ] Connect custom domain (futurenaut.co)
 - [ ] Add "Logbook" section and other resource hubs
+- [X] Add random features to the readme, so I can update my GitHub more often and remember how to do it.
