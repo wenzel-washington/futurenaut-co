@@ -11,6 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Reverted: The '700' weight for Space Mono has been added back to use the true bold font. -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Custom Styles -->
@@ -27,7 +28,7 @@
         
         /* Custom accent color from globals.css */
         .text-accent {
-            color: #ff6b18; /* Equivalent to hsl(16, 100%, 61.8%) */
+            color: #ff6b18;
         }
         .bg-accent {
             background-color: #ff6b18;
@@ -60,7 +61,7 @@
         /* Hero video container */
         .hero-section {
             position: relative;
-            height: 85vh;
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,6 +80,7 @@
             z-index: -2;
             transform: translateX(-50%) translateY(-50%);
             object-fit: cover;
+            object-position: left center;
         }
 
         /* Dark overlay for better text readability */
@@ -91,6 +93,18 @@
             background-color: rgba(0, 0, 0, 0.6);
             z-index: -1;
         }
+
+        /* Simple fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        .animate-delay-1 { animation-delay: 0.2s; }
+        .animate-delay-2 { animation-delay: 0.4s; }
+        .animate-delay-3 { animation-delay: 0.6s; }
     </style>
 </head>
 <body class="antialiased">
@@ -121,21 +135,29 @@
         <section class="hero-section text-white">
             <div class="video-overlay"></div>
             <video autoplay loop muted playsinline id="bg-video">
-                <source src="https://res.cloudinary.com/diobwuhcr/video/upload/v1745875806/bg_ani_hq_g3vkoz.mp4" type="video/mp4">
+                <source id="video-source" src="https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_lq.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
             
-            <div class="container mx-auto px-6 text-center">
-                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 animate-fade-in">Exploring Tomorrow's Possibilities</h1>
-                <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8">
-                    We build cutting-edge web experiences for forward-thinking brands and businesses.
+            <div class="container mx-auto px-6 text-center flex flex-col items-center pb-20">
+                <!-- Headline -->
+                <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-12 animate-fade-in opacity-0">
+                    Exploring AI, Crypto & Automation
+                </h1>
+                <!-- Subtext -->
+                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-2 animate-fade-in opacity-0 animate-delay-1">
+                    I build tools, projects, and experiments to work less and create more.
                 </p>
-                <div class="flex justify-center space-x-4">
-                    <a href="#" class="bg-accent text-white font-bold py-3 px-6 rounded-lg hover:bg-opacity-90 transition-colors">
-                        Start Building
+                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-8 animate-fade-in opacity-0 animate-delay-2">
+                    I'm subscribed to every AI tool available – so you don’t have to be.
+                </p>
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in opacity-0 animate-delay-3">
+                    <a href="#" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">
+                        Browse Projects
                     </a>
-                    <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-600/50 transition-colors">
-                        Learn More
+                    <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">
+                        What’s a Futurenaut?
                     </a>
                 </div>
             </div>
@@ -211,6 +233,25 @@
     <script>
         // Set current year in the footer
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Logic to load different video sources for mobile and desktop
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('bg-video');
+            const source = document.getElementById('video-source');
+            
+            const desktopVideo = "https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_hq.mp4";
+            const mobileVideo = "https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_lq.mp4";
+
+            // We use 768px as the breakpoint between mobile and desktop
+            if (window.innerWidth > 768) {
+                source.setAttribute('src', desktopVideo);
+            } else {
+                source.setAttribute('src', mobileVideo);
+            }
+
+            // Important: Load the new source into the video element
+            video.load();
+        });
     </script>
 
 </body>
