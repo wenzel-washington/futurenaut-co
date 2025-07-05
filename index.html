@@ -62,8 +62,9 @@
             position: relative;
             height: 100vh;
             display: flex;
+            flex-direction: column; /* Stack children vertically */
+            justify-content: center; /* Center the main block */
             align-items: center;
-            justify-content: center;
             overflow: hidden;
         }
 
@@ -147,38 +148,85 @@
                 Your browser does not support the video tag.
             </video>
             
-            <div class="container mx-auto px-6 text-center flex flex-col items-center">
-                <!-- Headline -->
-                <h1 class="text-3xl md:text-5xl font-bold leading-tight mb-6 md:mb-12 animate-fade-in opacity-0">
-                    Exploring AI, Crypto & Automation
-                </h1>
-                <!-- Subtext -->
-                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-2 animate-fade-in opacity-0 animate-delay-1">
-                    I build tools, projects, and experiments to work less and create more.
-                </p>
-                <!-- Increased bottom margin on mobile (mb-16) for better spacing -->
-                <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-16 md:mb-8 animate-fade-in opacity-0 animate-delay-2">
-                    I'm subscribed to every AI tool available – so you don’t have to be.
-                </p>
-                <!-- Buttons -->
-                <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in opacity-0 animate-delay-3">
-                    <a href="#" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">
-                        Browse Projects
-                    </a>
-                    <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">
-                        What’s a Futurenaut?
-                    </a>
+            <!-- This container is now a wrapper for the two content blocks -->
+            <div class="relative w-full h-full flex flex-col justify-center items-center">
+
+                <!-- Top Container for the Headline -->
+                <div class="absolute top-0 w-full text-center pt-[20vh] md:pt-[25vh]">
+                    <h1 class="text-3xl md:text-5xl font-bold leading-tight animate-fade-in opacity-0">
+                        Become a Futurenaut.
+                    </h1>
                 </div>
+
+                <!-- Center Container for Subtext and Buttons -->
+                <div class="container mx-auto px-6 text-center flex flex-col items-center">
+                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-2 animate-fade-in opacity-0 animate-delay-1">
+                        I build tools, projects, and experiments to work less and create more.
+                    </p>
+                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-12 md:mb-8 animate-fade-in opacity-0 animate-delay-2">
+                        I'm subscribed to every AI tool available – so you don’t have to be.
+                    </p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in opacity-0 animate-delay-3">
+                        <a href="#" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">
+                            Browse Projects
+                        </a>
+                        <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">
+                            What’s a Futurenaut?
+                        </a>
+                    </div>
+                </div>
+
             </div>
         </section>
 
-        <!-- Placeholder Section -->
-        <section class="py-20 bg-gray-900">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="text-3xl font-bold mb-4">Placeholder Section</h2>
-                <p class="text-white/70 max-w-2xl mx-auto">
-                    This is a placeholder for other content on your website. You can add sections here for "What We Do", "Our Projects", or a contact form. The structure is ready for you to expand upon.
+        <!-- About Section -->
+        <section class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6 max-w-3xl text-center">
+                <h2 class="text-3xl font-bold mb-4">What is a Futurenaut?</h2>
+                <p class="text-white/70 leading-relaxed">
+                    A Futurenaut is more than just an enthusiast for new technologies. It's a mindset. It's about staying curious, seeing tools like AI and automation not as a threat, but as a lever—as partners to unlock creative potential, reduce complexity, and ultimately lead a freer, more self-determined life. Here, I document my journey and share the tools and insights that help along the way.
                 </p>
+            </div>
+        </section>
+
+        <!-- Tools I Trust Section -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">Tools I Trust</h2>
+                    <p class="text-white/70 max-w-2xl mx-auto">
+                        Subscribed to every AI tool so you don’t have to.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tool Card 1 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=OA" alt="OpenAI Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">ChatGPT-4o</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">The all-rounder for text, code, and complex problem-solving. The first stop for almost any question.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                    <!-- Tool Card 2 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                           <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=MJ" alt="Midjourney Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">Midjourney</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Unsurpassed in creating aesthetically pleasing and artistic images. Ideal for visions and concepts.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                    <!-- Tool Card 3 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=N" alt="Notion Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">Notion AI</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Perfectly integrated into the daily workflow. Ideal for summarizing, structuring, and drafting documents.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -195,8 +243,6 @@
                     </h3>
                     <p class="text-gray-400 text-sm">
                         Exploring tomorrow's possibilities today.
-                        <br>
-                        Building the future, one pixel at a time.
                     </p>
                 </div>
                 
