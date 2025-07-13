@@ -20,6 +20,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0a0a0a; /* A dark background as a base */
             color: #f8f8f8;
+            overflow-x: hidden; /* Prevent horizontal scrollbars during animations */
         }
         .font-mono {
             font-family: 'Space Mono', monospace;
@@ -81,6 +82,7 @@
             transform: translateX(-50%) translateY(-50%);
             object-fit: cover;
             object-position: left center;
+            transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
         }
 
         /* Dark overlay for better text readability */
@@ -94,7 +96,7 @@
             z-index: -1;
         }
 
-        /* Simple fade-in animation */
+        /* --- ANIMATION STYLES --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -102,206 +104,219 @@
         .animate-fade-in {
             animation: fadeIn 0.8s ease-out forwards;
         }
-        .animate-delay-1 { animation-delay: 0.2s; }
-        .animate-delay-2 { animation-delay: 0.4s; }
-        .animate-delay-3 { animation-delay: 0.6s; }
+        
+        @keyframes fadeOutFast {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        .animate-fade-out-fast {
+            animation: fadeOutFast 0.3s ease-out forwards;
+        }
+
+        .zoom-in-effect {
+            transform: translateX(-50%) translateY(-50%) scale(1.2);
+            filter: blur(4px);
+        }
+
+        @keyframes flash {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .animate-flash {
+            animation: flash 0.5s ease-in-out forwards;
+        }
+
+        /* --- UNIFORM HYPERDRIVE STARFIELD --- */
+        .starfield {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            overflow: hidden;
+        }
+        .star {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2px; /* Uniform size */
+            height: 2px; /* Uniform size */
+            background: #fff;
+            border-radius: 50%;
+            /* --tx and --ty will be set by JS */
+            animation: hyperdrive 2.4s linear infinite; /* Uniform speed (Slower) */
+        }
+        @keyframes hyperdrive {
+            from {
+                transform: translate(0, 0) scale(0.5);
+                opacity: 1;
+            }
+            to {
+                transform: translate(var(--tx), var(--ty)) scale(1.5);
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header -->
-    <header class="absolute top-0 left-0 w-full z-10 py-4">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" class="text-xl font-mono font-bold text-white">
-                Futurenaut<span class="text-accent">.</span>co
-            </a>
-            <!-- Desktop Navigation -->
-            <nav id="desktop-nav" class="hidden md:flex items-center space-x-4">
-                <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white transition-colors py-2 px-3">About</a>
-                <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white transition-colors py-2 px-3">Projects</a>
-                <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white transition-colors py-2 px-3">Blog</a>
-                <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white transition-colors py-2 px-3">Contact</a>
-            </nav>
-            <!-- Mobile Menu Button -->
-            <button id="menu-btn" class="md:hidden text-white z-20">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-        </div>
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-black/90 backdrop-blur-sm z-10">
-            <nav class="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="#" class="text-2xl font-mono text-white">About</a>
-                <a href="#" class="text-2xl font-mono text-white">Projects</a>
-                <a href="#" class="text-2xl font-mono text-white">Blog</a>
-                <a href="#" class="text-2xl font-mono text-white">Contact</a>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <!-- Hero Section -->
-        <section class="hero-section text-white">
+        <section id="hero-section" class="hero-section text-white">
+            <header class="absolute top-0 left-0 w-full z-10 py-4">
+                <div class="container mx-auto px-6 flex justify-between items-center">
+                    <a href="#" class="text-xl font-mono font-bold text-white">Futurenaut<span class="text-accent">.</span>co</a>
+                    <nav id="desktop-nav" class="hidden md:flex items-center space-x-4">
+                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">About</a>
+                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Projects</a>
+                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Blog</a>
+                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Contact</a>
+                    </nav>
+                    <button id="menu-btn" class="md:hidden text-white z-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                </div>
+                <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-black/90 backdrop-blur-sm z-10">
+                    <nav class="flex flex-col items-center justify-center h-full space-y-8">
+                        <a href="#" class="text-2xl font-mono text-white">About</a>
+                        <a href="#" class="text-2xl font-mono text-white">Projects</a>
+                        <a href="#" class="text-2xl font-mono text-white">Blog</a>
+                        <a href="#" class="text-2xl font-mono text-white">Contact</a>
+                    </nav>
+                </div>
+            </header>
+
             <div class="video-overlay"></div>
             <video autoplay loop muted playsinline id="bg-video">
                 <source id="video-source" src="https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_lq.mp4" type="video/mp4">
-                Your browser does not support the video tag.
             </video>
             
-            <!-- This container is now a wrapper for the two content blocks -->
-            <div class="relative w-full h-full flex flex-col justify-center items-center">
-
-                <!-- Top Container for the Headline -->
+            <div id="hero-content" class="relative w-full h-full flex flex-col justify-center items-center">
                 <div class="absolute top-0 w-full text-center pt-[20vh] md:pt-[25vh]">
-                    <h1 class="text-3xl md:text-5xl font-bold leading-tight animate-fade-in opacity-0">
-                        Become a Futurenaut.
-                    </h1>
+                    <h1 class="text-3xl md:text-5xl font-bold leading-tight">Become a Futurenaut.</h1>
                 </div>
-
-                <!-- Center Container for Subtext and Buttons -->
                 <div class="container mx-auto px-6 text-center flex flex-col items-center">
-                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-2 animate-fade-in opacity-0 animate-delay-1">
-                        I build tools, projects, and experiments to work less and create more.
-                    </p>
-                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-12 md:mb-8 animate-fade-in opacity-0 animate-delay-2">
-                        I'm subscribed to every AI tool available – so you don’t have to be.
-                    </p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in opacity-0 animate-delay-3">
-                        <a href="#" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">
-                            Browse Projects
-                        </a>
-                        <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">
-                            What’s a Futurenaut?
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6 max-w-3xl text-center">
-                <h2 class="text-3xl font-bold mb-4">What is a Futurenaut?</h2>
-                <p class="text-white/70 leading-relaxed">
-                    A Futurenaut is more than just an enthusiast for new technologies. It's a mindset. It's about staying curious, seeing tools like AI and automation not as a threat, but as a lever—as partners to unlock creative potential, reduce complexity, and ultimately lead a freer, more self-determined life. Here, I document my journey and share the tools and insights that help along the way.
-                </p>
-            </div>
-        </section>
-
-        <!-- Tools I Trust Section -->
-        <section class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Tools I Trust</h2>
-                    <p class="text-white/70 max-w-2xl mx-auto">
-                        Subscribed to every AI tool so you don’t have to.
-                    </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tool Card 1 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=OA" alt="OpenAI Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">ChatGPT-4o</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">The all-rounder for text, code, and complex problem-solving. The first stop for almost any question.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
-                    </div>
-                    <!-- Tool Card 2 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                           <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=MJ" alt="Midjourney Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">Midjourney</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">Unsurpassed in creating aesthetically pleasing and artistic images. Ideal for visions and concepts.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
-                    </div>
-                    <!-- Tool Card 3 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=N" alt="Notion Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">Notion AI</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">Perfectly integrated into the daily workflow. Ideal for summarizing, structuring, and drafting documents.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-4">Exploring tomorrow's possibilities today.</p>
+                    <p class="text-md md:text-lg text-white/70 max-w-2xl mx-auto mb-12">I use AI, Automation & Crypto to empower you to work less and achieve more.</p>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4">
+                        <a href="#" id="see-whats-possible-btn" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">See What's Possible</a>
+                        <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">What's a Futurenaut?</a>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Cockpit Section (Initially Hidden) -->
+        <section id="cockpit-section" class="hidden w-full h-screen bg-black">
+            <div class="starfield"></div>
+            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
+                 <h2 class="text-3xl md:text-4xl font-bold font-mono mb-2 text-white/90">PROJECTS ONLINE</h2>
+                 <p class="text-accent mb-8 text-sm font-mono">Select a destination</p>
+
+                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-4xl">
+                    <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                        <h3 class="text-xl font-bold mb-2">Prompt Buddy</h3>
+                        <p class="text-sm text-white/60">Your copilot for crafting perfect AI prompts.</p>
+                    </a>
+                     <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                        <h3 class="text-xl font-bold mb-2">AI Fitness</h3>
+                        <p class="text-sm text-white/60">Personalized workout and nutrition plans.</p>
+                    </a>
+                     <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                        <h3 class="text-xl font-bold mb-2">Future Ideas</h3>
+                        <p class="text-sm text-white/60">A curated feed of bleeding-edge concepts.</p>
+                    </a>
+                 </div>
+
+                 <button id="return-btn" class="mt-12 text-sm text-white/50 hover:text-white transition-colors">&larr; Return to Hangar</button>
+            </div>
+        </section>
+        
+        <!-- Flash Overlay -->
+        <div id="flash-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-white z-50"></div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-black border-t border-gray-800 py-12">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <!-- Column 1: Logo and Description -->
-                <div>
-                    <h3 class="text-lg font-mono font-bold mb-4">
-                        Futurenaut<span class="text-accent">.</span>co
-                    </h3>
-                    <p class="text-gray-400 text-sm">
-                        Exploring tomorrow's possibilities today.
-                    </p>
-                </div>
-                
-                <!-- Column 2: Navigation -->
-                <div>
-                    <h4 class="font-mono font-bold mb-4">Navigation</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">About</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Projects</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Column 3: Connect and Copyright -->
-                <div>
-                    <h4 class="font-mono font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4 justify-center md:justify-start">
-                        <!-- GitHub Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="GitHub">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        </a>
-                        <!-- Twitter Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                        </a>
-                        <!-- LinkedIn Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="LinkedIn">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        </a>
-                    </div>
-                    <p class="mt-4 text-sm text-gray-500">
-                        &copy; <span id="year"></span> Futurenaut.co
-                        <br>
-                        All rights reserved.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // Set current year in the footer
-        document.getElementById('year').textContent = new Date().getFullYear();
-
         // --- Mobile Menu Logic ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
-            // Optional: Change burger icon to an 'X' when open
             if (!mobileMenu.classList.contains('hidden')) {
                 menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
             } else {
                 menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
             }
         });
+
+        // --- Cinematic Transition Logic ---
+        const seeWhatsPossibleBtn = document.getElementById('see-whats-possible-btn');
+        const heroSection = document.getElementById('hero-section');
+        const heroContent = document.getElementById('hero-content');
+        const bgVideo = document.getElementById('bg-video');
+        const flashOverlay = document.getElementById('flash-overlay');
+        const cockpitSection = document.getElementById('cockpit-section');
+        const returnBtn = document.getElementById('return-btn');
+
+        seeWhatsPossibleBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // 1. Fade out hero text and zoom video
+            heroContent.classList.add('animate-fade-out-fast');
+            bgVideo.classList.add('zoom-in-effect');
+
+            // 2. Trigger flash after a short delay
+            setTimeout(() => {
+                flashOverlay.classList.remove('hidden');
+                flashOverlay.classList.add('animate-flash');
+            }, 200);
+
+            // 3. Hide hero and show cockpit after flash
+            setTimeout(() => {
+                heroSection.classList.add('hidden');
+                cockpitSection.classList.remove('hidden');
+                cockpitSection.classList.add('animate-fade-in');
+                flashOverlay.classList.add('hidden'); // Hide flash after it's done
+            }, 600); 
+        });
+        
+        returnBtn.addEventListener('click', () => {
+            // Simple reload to return for this demo
+            window.location.reload();
+        });
+
+
+        // --- UNIFORM HYPERDRIVE STARFIELD (SAME SIZE, SAME SPEED) ---
+        const starfield = document.querySelector('.starfield');
+        if (starfield) {
+            for (let i = 0; i < 150; i++) { 
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Size is now fixed in CSS, no JS needed for it.
+
+                // Calculate a random angle and a distance to travel
+                const angle = Math.random() * Math.PI * 2;
+                const radius = Math.max(window.innerWidth, window.innerHeight); 
+                
+                // Final translation coordinates
+                const tx = Math.cos(angle) * radius;
+                const ty = Math.sin(angle) * radius;
+
+                // Set CSS custom properties for the animation
+                star.style.setProperty('--tx', `${tx}px`);
+                star.style.setProperty('--ty', `${ty}px`);
+                
+                // Set a randomized delay so they don't all start at once
+                star.style.animationDelay = `${Math.random() * 2}s`;
+
+                starfield.appendChild(star);
+            }
+        }
 
         // Logic to load different video sources for mobile and desktop
         document.addEventListener('DOMContentLoaded', function() {
