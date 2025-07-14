@@ -105,12 +105,12 @@
             animation: fadeIn 0.8s ease-out forwards;
         }
         
-        @keyframes fadeOutFast {
+        @keyframes fadeOut {
             from { opacity: 1; }
             to { opacity: 0; }
         }
-        .animate-fade-out-fast {
-            animation: fadeOutFast 0.3s ease-out forwards;
+        .animate-fade-out {
+            animation: fadeOut 0.3s ease-out forwards;
         }
 
         .zoom-in-effect {
@@ -209,36 +209,140 @@
             </div>
         </section>
 
-        <!-- Cockpit Section (Initially Hidden) -->
-        <section id="cockpit-section" class="hidden w-full h-screen bg-black">
-            <div class="starfield"></div>
-            <div class="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
-                 <h2 class="text-3xl md:text-4xl font-bold font-mono mb-2 text-white/90">PROJECTS ONLINE</h2>
-                 <p class="text-accent mb-8 text-sm font-mono">Select a destination</p>
-
-                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-4xl">
-                    <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 class="text-xl font-bold mb-2">Prompt Buddy</h3>
-                        <p class="text-sm text-white/60">Your copilot for crafting perfect AI prompts.</p>
-                    </a>
-                     <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 class="text-xl font-bold mb-2">AI Fitness</h3>
-                        <p class="text-sm text-white/60">Personalized workout and nutrition plans.</p>
-                    </a>
-                     <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 class="text-xl font-bold mb-2">Future Ideas</h3>
-                        <p class="text-sm text-white/60">A curated feed of bleeding-edge concepts.</p>
-                    </a>
-                 </div>
-
-                 <button id="return-btn" class="mt-12 text-sm text-white/50 hover:text-white transition-colors">&larr; Return to Hangar</button>
+        <!-- About Section -->
+        <section class="py-20 bg-gray-900/50">
+            <div class="container mx-auto px-6 max-w-3xl text-center">
+                <h2 class="text-3xl font-bold mb-4">What is a Futurenaut?</h2>
+                <p class="text-white/70 leading-relaxed">
+                    A Futurenaut is more than just an enthusiast for new technologies. It's a mindset. It's about staying curious, seeing tools like AI and automation not as a threat, but as a lever—as partners to unlock creative potential, reduce complexity, and ultimately lead a freer, more self-determined life. Here, I document my journey and share the tools and insights that help along the way.
+                </p>
             </div>
         </section>
-        
-        <!-- Flash Overlay -->
-        <div id="flash-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-white z-50"></div>
+
+        <!-- Tools I Trust Section -->
+        <section class="py-20 bg-black">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold mb-4">Tools I Trust</h2>
+                    <p class="text-white/70 max-w-2xl mx-auto">
+                        Subscribed to every AI tool so you don’t have to.
+                    </p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tool Card 1 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=OA" alt="OpenAI Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">ChatGPT-4o</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">The all-rounder for text, code, and complex problem-solving. The first stop for almost any question.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                    <!-- Tool Card 2 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                           <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=MJ" alt="Midjourney Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">Midjourney</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Unsurpassed in creating aesthetically pleasing and artistic images. Ideal for visions and concepts.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                    <!-- Tool Card 3 -->
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
+                        <div class="flex items-center mb-4">
+                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=N" alt="Notion Logo" class="w-10 h-10 rounded-md mr-4">
+                            <h3 class="text-xl font-bold">Notion AI</h3>
+                        </div>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Perfectly integrated into the daily workflow. Ideal for summarizing, structuring, and drafting documents.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
+    
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+                <!-- Column 1: Logo and Description -->
+                <div>
+                    <h3 class="text-lg font-mono font-bold mb-4">
+                        Futurenaut<span class="text-accent">.</span>co
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Exploring tomorrow's possibilities today.
+                    </p>
+                </div>
+                
+                <!-- Column 2: Navigation -->
+                <div>
+                    <h4 class="font-mono font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">About</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Projects</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Connect and Copyright -->
+                <div>
+                    <h4 class="font-mono font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 justify-center md:justify-start">
+                        <!-- GitHub Icon -->
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        </a>
+                        <!-- Twitter Icon -->
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
+                        </a>
+                        <!-- LinkedIn Icon -->
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="LinkedIn">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500">
+                        &copy; <span id="year"></span> Futurenaut.co
+                        <br>
+                        All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cockpit Section (Initially Hidden, acts as an overlay) -->
+    <section id="cockpit-section" class="hidden fixed top-0 left-0 w-full h-screen bg-black z-40">
+        <div class="starfield"></div>
+        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
+             <h2 class="text-3xl md:text-4xl font-bold font-mono mb-2 text-white/90">PROJECTS ONLINE</h2>
+             <p class="text-accent mb-8 text-sm font-mono">Select a destination</p>
+
+             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-4xl">
+                <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-2">Prompt Buddy</h3>
+                    <p class="text-sm text-white/60">Your copilot for crafting perfect AI prompts.</p>
+                </a>
+                 <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-2">AI Fitness</h3>
+                    <p class="text-sm text-white/60">Personalized workout and nutrition plans.</p>
+                </a>
+                 <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
+                    <h3 class="text-xl font-bold mb-2">Future Ideas</h3>
+                    <p class="text-sm text-white/60">A curated feed of bleeding-edge concepts.</p>
+                </a>
+             </div>
+
+             <button id="return-btn" class="mt-12 text-sm text-white/50 hover:text-white transition-colors">&larr; Return to Hangar</button>
+        </div>
+    </section>
+    
+    <!-- Flash Overlay -->
+    <div id="flash-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-white z-50"></div>
 
     <script>
         // --- Mobile Menu Logic ---
@@ -266,7 +370,7 @@
             e.preventDefault();
 
             // 1. Fade out hero text and zoom video
-            heroContent.classList.add('animate-fade-out-fast');
+            heroContent.classList.add('animate-fade-out');
             bgVideo.classList.add('zoom-in-effect');
 
             // 2. Trigger flash after a short delay
@@ -277,16 +381,23 @@
 
             // 3. Hide hero and show cockpit after flash
             setTimeout(() => {
-                heroSection.classList.add('hidden');
                 cockpitSection.classList.remove('hidden');
                 cockpitSection.classList.add('animate-fade-in');
-                flashOverlay.classList.add('hidden'); // Hide flash after it's done
-            }, 600); 
+            }, 500); 
+
+            setTimeout(() => {
+                 flashOverlay.classList.add('hidden');
+            }, 800);
         });
         
         returnBtn.addEventListener('click', () => {
-            // Simple reload to return for this demo
-            window.location.reload();
+            cockpitSection.classList.add('animate-fade-out');
+            setTimeout(() => {
+                cockpitSection.classList.add('hidden');
+                cockpitSection.classList.remove('animate-fade-out');
+                heroContent.classList.remove('animate-fade-out');
+                bgVideo.classList.remove('zoom-in-effect');
+            }, 300);
         });
 
 
@@ -297,8 +408,6 @@
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                // Size is now fixed in CSS, no JS needed for it.
-
                 // Calculate a random angle and a distance to travel
                 const angle = Math.random() * Math.PI * 2;
                 const radius = Math.max(window.innerWidth, window.innerHeight); 
