@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Futurenaut.co | Exploring Tomorrow's Possibilities</title>
+    <title>Futurenaut.co | Ihr Potenzial, entfesselt durch KI</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -15,61 +15,43 @@
 
     <!-- Custom Styles -->
     <style>
-        /* Apply custom fonts defined in tailwind.config.js */
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a0a0a; /* A dark background as a base */
+            background-color: #0a0a0a;
             color: #f8f8f8;
-            overflow-x: hidden; /* Prevent horizontal scrollbars during animations */
+            overflow-x: hidden;
         }
         .font-mono {
             font-family: 'Space Mono', monospace;
         }
-        
-        /* Custom accent color from globals.css */
-        .text-accent {
-            color: #ff6b18;
-        }
-        .bg-accent {
-            background-color: #ff6b18;
-        }
-        .border-accent {
-            border-color: #ff6b18;
-        }
-        .hover\:text-accent:hover {
-            color: #ff6b18;
-        }
-
-        /* Nav link underline animation from globals.css */
-        .nav-link {
-            position: relative;
-        }
+        .text-accent { color: #ff6b18; }
+        .bg-accent { background-color: #ff6b18; }
+        .border-accent { border-color: #ff6b18; }
+        .hover\:text-accent:hover { color: #ff6b18; }
+        .nav-link { position: relative; }
         .nav-link::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
             background-color: #ff6b18;
             transition: width 0.3s ease-in-out;
         }
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Hero video container */
+        .nav-link:hover::after { width: 100%; }
         .hero-section {
             position: relative;
             height: 100vh;
             display: flex;
-            flex-direction: column; /* Stack children vertically */
-            justify-content: center; /* Center the main block */
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
             overflow: hidden;
         }
-
-        /* Background video styling */
         #bg-video {
             position: absolute;
             top: 50%;
@@ -84,50 +66,106 @@
             object-position: left center;
             transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
         }
-
-        /* Dark overlay for better text readability */
         .video-overlay {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background: radial-gradient(ellipse at center, rgba(10, 10, 10, 0.35) 0%, rgba(10, 10, 10, 0.75) 80%, #0a0a0a 100%);
             z-index: -1;
         }
-
-        /* --- ANIMATION STYLES --- */
+        /* Section Separator Style */
+        .section-separator {
+            position: relative;
+            border-top: 1px solid rgba(255, 107, 24, 0.1);
+        }
+        .section-separator::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%;
+            height: 1px;
+            background: #ff6b18;
+            box-shadow: 0 0 15px rgba(255, 107, 24, 0.4);
+            z-index: 1;
+        }
+        /* Cockpit Section Style */
+        .cockpit-section {
+            position: relative;
+            padding: 8rem 0;
+            background-color: #111; /* Darker cockpit interior color */
+            clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+        }
+        .cockpit-frame {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .cockpit-frame::before, .cockpit-frame::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, rgba(255,107,24,0.3), transparent);
+            height: 2px;
+        }
+        .cockpit-frame::before {
+            top: 2rem;
+            width: 80%;
+        }
+        .cockpit-frame::after {
+            bottom: 2rem;
+            width: 80%;
+        }
+        .card-glow {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 107, 24, 0.2);
+        }
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(80% 80% at 50% 50%, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .card-glow:hover::before {
+            opacity: 1;
+        }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-        
+        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
         @keyframes fadeOut {
             from { opacity: 1; }
             to { opacity: 0; }
         }
-        .animate-fade-out {
-            animation: fadeOut 0.3s ease-out forwards;
-        }
-
+        .animate-fade-out { animation: fadeOut 0.3s ease-out forwards; }
         .zoom-in-effect {
             transform: translateX(-50%) translateY(-50%) scale(1.2);
             filter: blur(4px);
         }
-
         @keyframes flash {
             0% { opacity: 0; }
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
-        .animate-flash {
-            animation: flash 0.5s ease-in-out forwards;
-        }
-
-        /* --- UNIFORM HYPERDRIVE STARFIELD --- */
+        .animate-flash { animation: flash 0.5s ease-in-out forwards; }
         .starfield {
             position: absolute;
             top: 0;
@@ -141,50 +179,53 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 2px; /* Uniform size */
-            height: 2px; /* Uniform size */
+            width: 2px;
+            height: 2px;
             background: #fff;
             border-radius: 50%;
-            /* --tx and --ty will be set by JS */
-            animation: hyperdrive 2.4s linear infinite; /* Uniform speed (Slower) */
+            animation: hyperdrive 2.4s linear infinite;
         }
         @keyframes hyperdrive {
-            from {
-                transform: translate(0, 0) scale(0.5);
-                opacity: 1;
-            }
-            to {
-                transform: translate(var(--tx), var(--ty)) scale(1.5);
-                opacity: 0;
-            }
+            from { transform: translate(0, 0) scale(0.5); opacity: 1; }
+            to { transform: translate(var(--tx), var(--ty)) scale(1.5); opacity: 0; }
         }
 
+        /* --- New Styles for Scroll Animation --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <main>
-        <!-- Hero Section -->
+        <!-- Section 1: Hero Section (No changes) -->
         <section id="hero-section" class="hero-section text-white">
             <header class="absolute top-0 left-0 w-full z-10 py-4">
                 <div class="container mx-auto px-6 flex justify-between items-center">
                     <a href="#" class="text-xl font-mono font-bold text-white">Futurenaut<span class="text-accent">.</span>co</a>
-                    <nav id="desktop-nav" class="hidden md:flex items-center space-x-4">
-                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">About</a>
-                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Projects</a>
-                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Blog</a>
-                        <a href="#" class="nav-link text-sm font-mono text-white/80 hover:text-white">Contact</a>
+                    <nav id="desktop-nav" class="hidden md:flex items-center space-x-6">
+                        <a href="#services" class="nav-link text-sm font-mono text-white/80 hover:text-white">Dienstleistungen</a>
+                        <a href="#casestudies" class="nav-link text-sm font-mono text-white/80 hover:text-white">Fallstudien</a>
+                        <a href="#about" class="nav-link text-sm font-mono text-white/80 hover:text-white">Über Mich</a>
+                        <a href="#contact" class="nav-link text-sm font-mono text-white/80 hover:text-white">Kontakt</a>
                     </nav>
                     <button id="menu-btn" class="md:hidden text-white z-20">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                     </button>
                 </div>
-                <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-black/90 backdrop-blur-sm z-10">
+                <div id="mobile-menu" class="hidden md:hidden fixed top-0 left-0 w-full h-screen bg-black/95 backdrop-blur-sm z-10">
                     <nav class="flex flex-col items-center justify-center h-full space-y-8">
-                        <a href="#" class="text-2xl font-mono text-white">About</a>
-                        <a href="#" class="text-2xl font-mono text-white">Projects</a>
-                        <a href="#" class="text-2xl font-mono text-white">Blog</a>
-                        <a href="#" class="text-2xl font-mono text-white">Contact</a>
+                        <a href="#services" class="text-2xl font-mono text-white">Dienstleistungen</a>
+                        <a href="#casestudies" class="text-2xl font-mono text-white">Fallstudien</a>
+                        <a href="#about" class="text-2xl font-mono text-white">Über Mich</a>
+                        <a href="#contact" class="text-2xl font-mono text-white">Kontakt</a>
                     </nav>
                 </div>
             </header>
@@ -194,172 +235,281 @@
                 <source id="video-source" src="https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_lq.mp4" type="video/mp4">
             </video>
             
-            <div id="hero-content" class="relative w-full h-full flex flex-col justify-center items-center">
-                <div class="absolute top-0 w-full text-center pt-[20vh] md:pt-[25vh]">
-                    <h1 class="text-3xl md:text-5xl font-bold leading-tight">Become a Futurenaut.</h1>
-                </div>
-                <div class="container mx-auto px-6 text-center flex flex-col items-center">
-                    <p class="text-lg md:text-xl text-white/80 max-w-2xl mx-auto mb-4">Exploring tomorrow's possibilities today.</p>
-                    <p class="text-md md:text-lg text-white/70 max-w-2xl mx-auto mb-12">I use AI, Automation & Crypto to empower you to work less and achieve more.</p>
-                    <div class="flex flex-col sm:flex-row justify-center gap-4">
-                        <a href="#" id="see-whats-possible-btn" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform">See What's Possible</a>
-                        <a href="#" class="bg-gray-700/50 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">What's a Futurenaut?</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section class="py-20 bg-gray-900/50">
-            <div class="container mx-auto px-6 max-w-3xl text-center">
-                <h2 class="text-3xl font-bold mb-4">What is a Futurenaut?</h2>
-                <p class="text-white/70 leading-relaxed">
-                    A Futurenaut is more than just an enthusiast for new technologies. It's a mindset. It's about staying curious, seeing tools like AI and automation not as a threat, but as a lever—as partners to unlock creative potential, reduce complexity, and ultimately lead a freer, more self-determined life. Here, I document my journey and share the tools and insights that help along the way.
-                </p>
-            </div>
-        </section>
-
-        <!-- Tools I Trust Section -->
-        <section class="py-20 bg-black">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold mb-4">Tools I Trust</h2>
-                    <p class="text-white/70 max-w-2xl mx-auto">
-                        Subscribed to every AI tool so you don’t have to.
+            <div id="hero-content" class="relative w-full h-full flex flex-col justify-center items-center text-center">
+                <div class="container mx-auto px-6">
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4 text-white animate-fade-in">Ihr Geschäftspotenzial,<br><span class="text-accent">entfesselt durch KI.</span></h1>
+                    <p class="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+                        Wir verbinden 20 Jahre Praxiserfahrung im Digital-Marketing mit intelligenten Automationslösungen, um Ihre Effizienz zu steigern und Ihren Umsatz zu maximieren.
                     </p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Tool Card 1 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=OA" alt="OpenAI Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">ChatGPT-4o</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">The all-rounder for text, code, and complex problem-solving. The first stop for almost any question.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
-                    </div>
-                    <!-- Tool Card 2 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                           <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=MJ" alt="Midjourney Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">Midjourney</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">Unsurpassed in creating aesthetically pleasing and artistic images. Ideal for visions and concepts.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
-                    </div>
-                    <!-- Tool Card 3 -->
-                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-800 flex flex-col items-start">
-                        <div class="flex items-center mb-4">
-                            <img src="https://placehold.co/40x40/1a1a1a/ff6b18?text=N" alt="Notion Logo" class="w-10 h-10 rounded-md mr-4">
-                            <h3 class="text-xl font-bold">Notion AI</h3>
-                        </div>
-                        <p class="text-white/60 text-sm mb-4 flex-grow">Perfectly integrated into the daily workflow. Ideal for summarizing, structuring, and drafting documents.</p>
-                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Learn more &rarr;</a>
+                    <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+                        <a href="#contact" id="see-whats-possible-btn" class="bg-accent text-white font-bold py-3 px-8 rounded-lg hover:scale-105 transition-transform shadow-lg shadow-accent/20">Kostenloses Strategiegespräch</a>
+                        <a href="#about" class="bg-gray-700/50 border border-gray-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-600/50 transition-all">Was ist ein Futurenaut?</a>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- Section 2: Cockpit Section with animation class -->
+        <section class="cockpit-section fade-in-section">
+            <div class="cockpit-frame"></div>
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Vom täglichen Kleinkram zur strategischen Vision</h2>
+                <p class="text-white/70 max-w-3xl mx-auto mb-16">Erkennen Sie sich hier wieder? Wir verwandeln Ihre größten Herausforderungen in Ihre stärksten Wettbewerbsvorteile.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Pain Point 1 -->
+                    <div class="text-left p-6 border border-orange-900/50 rounded-lg bg-black/30 backdrop-blur-sm">
+                        <h3 class="font-mono text-accent mb-3">Problem: Zeitfressende Routineaufgaben</h3>
+                        <p class="text-white/60 text-sm leading-relaxed">Manuelle Dateneingabe, wiederkehrende E-Mails und repetitive Prozesse binden wertvolle Zeit, die für Wachstum und Innovation fehlt.</p>
+                    </div>
+                    <!-- Pain Point 2 -->
+                    <div class="text-left p-6 border border-orange-900/50 rounded-lg bg-black/30 backdrop-blur-sm">
+                        <h3 class="font-mono text-accent mb-3">Problem: Unstrukturierte Datenberge</h3>
+                        <p class="text-white/60 text-sm leading-relaxed">Wichtige Informationen sind in Dokumenten, E-Mails und Tabellen vergraben. Wertvolles Wissen bleibt ungenutzt und Entscheidungen fallen schwer.</p>
+                    </div>
+                    <!-- Pain Point 3 -->
+                    <div class="text-left p-6 border border-orange-900/50 rounded-lg bg-black/30 backdrop-blur-sm">
+                        <h3 class="font-mono text-accent mb-3">Problem: Verpasste Marketing-Chancen</h3>
+                        <p class="text-white/60 text-sm leading-relaxed">Die Konkurrenz ist schneller, die Content-Erstellung mühsam und die personalisierte Kundenansprache kaum skalierbar.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Kerndienstleistungen with animation class -->
+        <section id="services" class="py-20 md:py-32 section-separator fade-in-section" style="background-color: #201307;">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Unsere Dienstleistungen</h2>
+                    <p class="text-white/70 max-w-3xl mx-auto">Wir bieten skalierbare Lösungen, vom konkreten Marketing-Tool bis zur umfassenden KI-Strategie.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="card-glow bg-black/20 p-8 rounded-lg border border-gray-800 flex flex-col items-start text-left">
+                        <div class="bg-accent/10 p-3 rounded-lg mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg></div>
+                        <h3 class="text-xl font-bold mb-2">KI-gestützte Marketing- & Vertriebsautomatisierung</h3>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Von der automatisierten Content-Erstellung bis zur intelligenten Lead-Qualifizierung – wir schalten den Turbo für Ihr Wachstum.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Mehr erfahren &rarr;</a>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="card-glow bg-black/20 p-8 rounded-lg border border-gray-800 flex flex-col items-start text-left">
+                        <div class="bg-accent/10 p-3 rounded-lg mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div>
+                        <h3 class="text-xl font-bold mb-2">Intelligentes Daten- & Prozessmanagement</h3>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Wir bauen interne Wissensdatenbanken auf, optimieren Ihr Onboarding und verwandeln unstrukturierte Daten in wertvolle, abrufbare Assets.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Mehr erfahren &rarr;</a>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="card-glow bg-black/20 p-8 rounded-lg border border-gray-800 flex flex-col items-start text-left">
+                        <div class="bg-accent/10 p-3 rounded-lg mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#ff6b18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg></div>
+                        <h3 class="text-xl font-bold mb-2">Individuelle KI-Strategie & Beratung</h3>
+                        <p class="text-white/60 text-sm mb-4 flex-grow">Wir entwickeln Ihre maßgeschneiderte KI-Roadmap, führen Workshops durch und begleiten Sie als strategischer Partner in die Zukunft.</p>
+                        <a href="#" class="text-accent text-sm font-bold hover:underline mt-auto">Mehr erfahren &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Section 4: The Futurenaut Method with animation class -->
+        <section class="py-20 md:py-32 section-separator fade-in-section" style="background-color: #180d04;">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Die Futurenaut-Methode</h2>
+                    <p class="text-white/70 max-w-3xl mx-auto">Unser bewährter 4-Schritte-Prozess für transparenten und messbaren Erfolg.</p>
+                </div>
+                <div class="relative grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <!-- Process Step 1 -->
+                    <div class="text-center p-6">
+                        <div class="relative mb-4 flex justify-center">
+                            <div class="w-16 h-16 rounded-full bg-black/30 border-2 border-accent flex items-center justify-center font-mono text-2xl text-accent">01</div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Discovery & Analyse</h3>
+                        <p class="text-white/60 text-sm">Wir tauchen tief in Ihre aktuellen Prozesse ein und identifizieren ungenutzte Potenziale und Engpässe.</p>
+                    </div>
+                    <!-- Process Step 2 -->
+                    <div class="text-center p-6">
+                        <div class="relative mb-4 flex justify-center">
+                            <div class="w-16 h-16 rounded-full bg-black/30 border-2 border-accent flex items-center justify-center font-mono text-2xl text-accent">02</div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Strategie & Konzeption</h3>
+                        <p class="text-white/60 text-sm">Wir entwickeln eine maßgeschneiderte KI-Roadmap, die exakt auf Ihre Geschäftsziele ausgerichtet ist.</p>
+                    </div>
+                    <!-- Process Step 3 -->
+                    <div class="text-center p-6">
+                        <div class="relative mb-4 flex justify-center">
+                           <div class="w-16 h-16 rounded-full bg-black/30 border-2 border-accent flex items-center justify-center font-mono text-2xl text-accent">03</div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Implementierung & Integration</h3>
+                        <p class="text-white/60 text-sm">Wir setzen die Lösungen pragmatisch um und sorgen für eine nahtlose Einbindung in Ihre bestehenden Systeme.</p>
+                    </div>
+                    <!-- Process Step 4 -->
+                    <div class="text-center p-6">
+                        <div class="relative mb-4 flex justify-center">
+                            <div class="w-16 h-16 rounded-full bg-black/30 border-2 border-accent flex items-center justify-center font-mono text-2xl text-accent">04</div>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Optimierung & Skalierung</h3>
+                        <p class="text-white/60 text-sm">Wir messen kontinuierlich die Ergebnisse und optimieren die Systeme, um den maximalen ROI sicherzustellen.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Warum Futurenaut? with animation class -->
+        <section class="py-20 md:py-32 section-separator fade-in-section" style="background-color: #100a02;">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Warum Futurenaut?</h2>
+                    <p class="text-white/70 max-w-3xl mx-auto">Wir sind mehr als nur Technologen. Wir sind Ihre strategischen Partner für digitales Wachstum.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- USP 1 -->
+                    <div class="bg-black/20 p-6 rounded-lg border border-gray-800">
+                        <h3 class="font-bold text-accent mb-2">Praxiserprobte Wachstums-DNA</h3>
+                        <p class="text-white/70 text-sm">20 Jahre an der Front des digitalen Marketings. Wir wissen, was funktioniert, weil wir es selbst umgesetzt und verantwortet haben.</p>
+                    </div>
+                    <!-- USP 2 -->
+                    <div class="bg-black/20 p-6 rounded-lg border border-gray-800">
+                        <h3 class="font-bold text-accent mb-2">Pragmatische Technologie-Anwendung</h3>
+                        <p class="text-white/70 text-sm">Keine akademischen Elfenbeintürme. Wir implementieren nur KI-Lösungen, die Ihnen heute einen echten, messbaren Vorteil bringen.</p>
+                    </div>
+                    <!-- USP 3 -->
+                    <div class="bg-black/20 p-6 rounded-lg border border-gray-800">
+                        <h3 class="font-bold text-accent mb-2">Partnerschaft auf Augenhöhe</h3>
+                        <p class="text-white/70 text-sm">Als selbstständiger Unternehmer verstehe ich Ihre Herausforderungen. Ich bin Ihr strategischer Partner, nicht nur ein externer Dienstleister.</p>
+                    </div>
+                    <!-- USP 4 -->
+                    <div class="bg-black/20 p-6 rounded-lg border border-gray-800">
+                        <h3 class="font-bold text-accent mb-2">Zukunftssicher & Weitsichtig</h3>
+                        <p class="text-white/70 text-sm">Mit Einblicken in KI und dezentrale Technologien (Web3) stellen wir sicher, dass Ihre Strategie von heute auch morgen noch führend ist.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Fallstudien with animation class -->
+        <section id="casestudies" class="py-20 md:py-32 section-separator fade-in-section" style="background-color: #0a0a0a;">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Kompetenz in Aktion</h2>
+                    <p class="text-white/70 max-w-3xl mx-auto">Wir denken strategisch und lösen komplexe Probleme. Hier sehen Sie, wie wir es für Sie tun würden.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Case Study 1 -->
+                    <div class="card-glow bg-black/20 rounded-lg border border-gray-800 overflow-hidden">
+                        <img src="https://placehold.co/600x350/0a0a0a/1a1a1a?text=Konzept-Fallstudie" alt="Platzhalterbild für Fallstudie" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <p class="text-sm font-mono text-accent mb-2">Online-Shop Automatisierung</p>
+                            <h3 class="text-xl font-bold mb-3">Manuelle Produktbeschreibung adé</h3>
+                            <p class="text-white/60 text-sm mb-4">Wie ein mittelständischer Online-Shop durch KI die Zeit für Content-Erstellung um 75% reduzieren und die SEO-Performance steigern kann.</p>
+                            <a href="#" class="text-accent text-sm font-bold hover:underline">Fallstudie ansehen &rarr;</a>
+                        </div>
+                    </div>
+                    <!-- Case Study 2 -->
+                    <div class="card-glow bg-black/20 rounded-lg border border-gray-800 overflow-hidden">
+                        <img src="https://placehold.co/600x350/0a0a0a/1a1a1a?text=Konzept-Fallstudie" alt="Platzhalterbild für Fallstudie" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                             <p class="text-sm font-mono text-accent mb-2">Agentur-Effizienz</p>
+                            <h3 class="text-xl font-bold mb-3">Internes Wissen, sofort verfügbar</h3>
+                            <p class="text-white/60 text-sm mb-4">Wie eine Kreativagentur mit einem internen KI-Chatbot das Onboarding neuer Mitarbeiter beschleunigt und auf Knopfdruck auf ihr gesamtes Wissen zugreift.</p>
+                            <a href="#" class="text-accent text-sm font-bold hover:underline">Fallstudie ansehen &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Über Mich with animation class -->
+        <section id="about" class="py-20 md:py-32 bg-black section-separator fade-in-section">
+            <div class="container mx-auto px-6 max-w-5xl">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+                    <div class="md:col-span-1">
+                        <img src="https://wenzel-washington.github.io/futurenaut-co/gfx/wenzel_washington_bw.jpg" alt="Portrait von Wenzel Washington" class="rounded-lg w-full h-auto shadow-lg shadow-accent/10 border-2 border-gray-800">
+                    </div>
+                    <div class="md:col-span-2 text-left">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ihr erfahrener Navigator für die digitale Zukunft.</h2>
+                        <p class="text-white/70 leading-relaxed mb-4">
+                            Mein Name ist Wenzel Washington. Seit über 20 Jahren bin ich als Unternehmer im digitalen Marketing zu Hause. Ich habe die Evolution des Internets von der Pike auf miterlebt – vom Aufstieg des Affiliate-Marketings bis zur datengetriebenen Performance-Optimierung. Mein Fokus war immer derselbe: messbare Ergebnisse und nachhaltiges Wachstum.
+                        </p>
+                        <p class="text-white/70 leading-relaxed">
+                            Mit dem Aufkommen von künstlicher Intelligenz erlebte ich einen "Aha-Moment": Die Werkzeuge, die uns heute zur Verfügung stehen, sind nicht nur eine weitere Evolutionsstufe. Sie sind eine Revolution. Sie ermöglichen es uns, die Komplexität zu meistern und uns auf das zu konzentrieren, was wirklich zählt: Kreativität, Strategie und menschliche Verbindung. Als Futurenaut verbinde ich meine jahrzehntelange Praxiserfahrung mit der transformativen Kraft der KI, um Sie sicher durch die Chancen von morgen zu navigieren.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Call-to-Action with animation class -->
+        <section id="contact" class="py-20 md:py-32 bg-black section-separator fade-in-section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Sind Sie bereit, Ihr Potenzial zu entfesseln?</h2>
+                <p class="text-white/70 max-w-2xl mx-auto mb-8">Lassen Sie uns in einem unverbindlichen Gespräch herausfinden, wie KI und Automatisierung Ihr Geschäft transformieren können. Kein Fachjargon, keine Verkaufspräsentation – nur ein ehrlicher Austausch über Ihre Ziele und Möglichkeiten.</p>
+                <a href="#" class="bg-accent text-white font-bold py-4 px-10 rounded-lg hover:scale-105 transition-transform text-lg shadow-lg shadow-accent/20">Jetzt kostenloses Erstgespräch vereinbaren</a>
+            </div>
+        </section>
     </main>
     
     <!-- Footer -->
     <footer class="bg-black border-t border-gray-800 py-12">
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
-                <!-- Column 1: Logo and Description -->
                 <div>
-                    <h3 class="text-lg font-mono font-bold mb-4">
-                        Futurenaut<span class="text-accent">.</span>co
-                    </h3>
-                    <p class="text-gray-400 text-sm">
-                        Exploring tomorrow's possibilities today.
-                    </p>
+                    <h3 class="text-lg font-mono font-bold mb-4">Futurenaut<span class="text-accent">.</span>co</h3>
+                    <p class="text-gray-400 text-sm">Ihr Potenzial, entfesselt durch KI.</p>
                 </div>
-                
-                <!-- Column 2: Navigation -->
                 <div>
                     <h4 class="font-mono font-bold mb-4">Navigation</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Home</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">About</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Projects</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-accent transition-colors">Contact</a></li>
+                        <li><a href="#hero-section" class="text-gray-400 hover:text-accent transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-accent transition-colors">Dienstleistungen</a></li>
+                        <li><a href="#casestudies" class="text-gray-400 hover:text-accent transition-colors">Fallstudien</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-accent transition-colors">Über Mich</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-accent transition-colors">Kontakt</a></li>
                     </ul>
                 </div>
-                
-                <!-- Column 3: Connect and Copyright -->
                 <div>
                     <h4 class="font-mono font-bold mb-4">Connect</h4>
                     <div class="flex space-x-4 justify-center md:justify-start">
-                        <!-- GitHub Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="GitHub">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-                        </a>
-                        <!-- Twitter Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg>
-                        </a>
-                        <!-- LinkedIn Icon -->
-                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="LinkedIn">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                        </a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                        <a href="#" class="text-gray-400 hover:text-accent transition-colors" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
                     </div>
-                    <p class="mt-4 text-sm text-gray-500">
-                        &copy; <span id="year"></span> Futurenaut.co
-                        <br>
-                        All rights reserved.
-                    </p>
+                    <p class="mt-4 text-sm text-gray-500">&copy; <span id="year"></span> Futurenaut.co. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Cockpit Section (Initially Hidden, acts as an overlay) -->
+    <!-- Cockpit Section (Initially Hidden) -->
     <section id="cockpit-section" class="hidden fixed top-0 left-0 w-full h-screen bg-black z-40">
         <div class="starfield"></div>
         <div class="relative z-10 flex flex-col items-center justify-center h-full text-center p-6">
-             <h2 class="text-3xl md:text-4xl font-bold font-mono mb-2 text-white/90">PROJECTS ONLINE</h2>
-             <p class="text-accent mb-8 text-sm font-mono">Select a destination</p>
-
-             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 w-full max-w-4xl">
-                <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-bold mb-2">Prompt Buddy</h3>
-                    <p class="text-sm text-white/60">Your copilot for crafting perfect AI prompts.</p>
-                </a>
-                 <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-bold mb-2">AI Fitness</h3>
-                    <p class="text-sm text-white/60">Personalized workout and nutrition plans.</p>
-                </a>
-                 <a href="#" class="cockpit-button border-2 border-accent/50 hover:border-accent hover:bg-accent/10 transition-all duration-300 p-6 rounded-lg backdrop-blur-sm">
-                    <h3 class="text-xl font-bold mb-2">Future Ideas</h3>
-                    <p class="text-sm text-white/60">A curated feed of bleeding-edge concepts.</p>
-                </a>
+             <h2 class="text-3xl md:text-4xl font-bold font-mono mb-2 text-white/90">STRATEGIE-GESPRÄCH</h2>
+             <p class="text-accent mb-8 text-sm font-mono">Wählen Sie einen Termin</p>
+             <div class="w-full max-w-4xl p-6 rounded-lg backdrop-blur-sm border-2 border-accent/50">
+                <!-- Hier könnte ein Kalender-Einbettungstool wie Calendly platziert werden -->
+                <p class="text-white/80">Hier wird in Kürze ein Kalender zur Terminbuchung integriert.</p>
+                <p class="text-white/60 text-sm mt-2">Bis dahin, kontaktieren Sie mich gerne direkt.</p>
              </div>
-
-             <button id="return-btn" class="mt-12 text-sm text-white/50 hover:text-white transition-colors">&larr; Return to Hangar</button>
+             <button id="return-btn" class="mt-12 text-sm text-white/50 hover:text-white transition-colors">&larr; Zurück zur Hauptseite</button>
         </div>
     </section>
     
-    <!-- Flash Overlay -->
     <div id="flash-overlay" class="hidden fixed top-0 left-0 w-full h-full bg-white z-50"></div>
 
     <script>
         // --- Mobile Menu Logic ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
+        const mobileNavLinks = mobileMenu.querySelectorAll('a');
+        function toggleMenu() {
             mobileMenu.classList.toggle('hidden');
-            if (!mobileMenu.classList.contains('hidden')) {
-                menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-            } else {
-                menuBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
-            }
-        });
+            menuBtn.innerHTML = mobileMenu.classList.contains('hidden')
+                ? `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`
+                : `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+        }
+        menuBtn.addEventListener('click', toggleMenu);
+        mobileNavLinks.forEach(link => link.addEventListener('click', toggleMenu));
 
         // --- Cinematic Transition Logic ---
         const seeWhatsPossibleBtn = document.getElementById('see-whats-possible-btn');
-        const heroSection = document.getElementById('hero-section');
         const heroContent = document.getElementById('hero-content');
         const bgVideo = document.getElementById('bg-video');
         const flashOverlay = document.getElementById('flash-overlay');
@@ -367,19 +517,16 @@
         const returnBtn = document.getElementById('return-btn');
 
         seeWhatsPossibleBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            // 1. Fade out hero text and zoom video
+            e.preventDefault(); 
+            
             heroContent.classList.add('animate-fade-out');
             bgVideo.classList.add('zoom-in-effect');
 
-            // 2. Trigger flash after a short delay
             setTimeout(() => {
                 flashOverlay.classList.remove('hidden');
                 flashOverlay.classList.add('animate-flash');
             }, 200);
 
-            // 3. Hide hero and show cockpit after flash
             setTimeout(() => {
                 cockpitSection.classList.remove('hidden');
                 cockpitSection.classList.add('animate-fade-in');
@@ -396,52 +543,67 @@
                 cockpitSection.classList.add('hidden');
                 cockpitSection.classList.remove('animate-fade-out');
                 heroContent.classList.remove('animate-fade-out');
+                heroContent.classList.add('animate-fade-in');
                 bgVideo.classList.remove('zoom-in-effect');
             }, 300);
         });
 
-
-        // --- UNIFORM HYPERDRIVE STARFIELD (SAME SIZE, SAME SPEED) ---
+        // --- Starfield Logic ---
         const starfield = document.querySelector('.starfield');
         if (starfield) {
             for (let i = 0; i < 150; i++) { 
                 const star = document.createElement('div');
                 star.className = 'star';
-                
-                // Calculate a random angle and a distance to travel
                 const angle = Math.random() * Math.PI * 2;
                 const radius = Math.max(window.innerWidth, window.innerHeight); 
-                
-                // Final translation coordinates
                 const tx = Math.cos(angle) * radius;
                 const ty = Math.sin(angle) * radius;
-
-                // Set CSS custom properties for the animation
                 star.style.setProperty('--tx', `${tx}px`);
                 star.style.setProperty('--ty', `${ty}px`);
-                
-                // Set a randomized delay so they don't all start at once
                 star.style.animationDelay = `${Math.random() * 2}s`;
-
                 starfield.appendChild(star);
             }
         }
 
-        // Logic to load different video sources for mobile and desktop
+        // --- Dynamic Video Source & Year ---
         document.addEventListener('DOMContentLoaded', function() {
             const video = document.getElementById('bg-video');
             const source = document.getElementById('video-source');
-            
             const desktopVideo = "https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_hq.mp4";
             const mobileVideo = "https://wenzel-washington.github.io/futurenaut-co/gfx/background/bg_ani_lq.mp4";
-
             if (window.innerWidth > 768) {
-                source.setAttribute('src', desktopVideo);
+                if (source.getAttribute('src') !== desktopVideo) {
+                    source.setAttribute('src', desktopVideo);
+                    video.load();
+                }
             } else {
-                source.setAttribute('src', mobileVideo);
+                 if (source.getAttribute('src') !== mobileVideo) {
+                    source.setAttribute('src', mobileVideo);
+                    video.load();
+                }
             }
+            document.getElementById('year').textContent = new Date().getFullYear();
 
-            video.load();
+            // --- New Intersection Observer Logic for Fade-In Effect ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            const options = {
+                root: null, // relative to document viewport 
+                rootMargin: '0px',
+                threshold: 0.1 // 10% of the item must be visible
+            };
+
+            const observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, options);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
         });
     </script>
 
