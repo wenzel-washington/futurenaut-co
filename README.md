@@ -33,6 +33,7 @@ With the help of ChatGPT, I'm using a space exploration theme and gamification s
 
 - [X] Deploy site to live server (DigitalOcean Droplet)
 - [X] Set up GitHub Actions auto-deploy pipeline
+- [X] Trigger redeploy due to secret key mishap.
 - [X] Connect custom domain (futurenaut.co) *(pending SSL)*
 - [ ] Add SSL via Certbot once domain fully resolves
 - [ ] Add more featured project cards
