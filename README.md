@@ -41,4 +41,8 @@ With the help of ChatGPT, I'm using a space exploration theme and gamification s
 - [ ] Add "Logbook" section and other resource hubs
 - [ ] Integrate optional backend (Node.js or Python APIs)
 
+## 🛡 Logbook & Sidequests
+
+- [X] Enabled orbital shields (UFW) and anti-boarding protocol (Fail2ban) — uninvited space pirates now get airlocked in under 5 attempts.
+
 ---
