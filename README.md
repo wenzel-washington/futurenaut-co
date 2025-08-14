@@ -43,6 +43,7 @@ With the help of ChatGPT, I'm using a space exploration theme and gamification s
 
 ## 🛡 Logbook & Sidequests
 
-- [X] Enabled orbital shields (UFW) and anti-boarding protocol (Fail2ban) — uninvited space pirates now get airlocked in under 5 attempts.
+- [X] Enabled orbital shields (UFW) and anti-boarding protocol (Fail2ban) — uninvited space pirates now get airlocked in under 5 attempts. Date: 13/08/2025
+- [X] Added new user on the server. It wasn't easy, but got it done.
 
 ---
