@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Futurenaut.co – Wachstum durch KI</title>
+  <meta name="description" content="Pragmatische KI- und Automatisierungslösungen für Marketing, Vertrieb und Prozesse. Audit, Blueprint, Build & Scale – messbar und skalierbar." />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body id="top">
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="container nav-row">
+      <!-- LOGO/TOP-LEFT: stays as-is -->
+      <a class="brand" href="#top" aria-label="Zur Startseite">Futurenaut <span class="dot">.</span> co</a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Navigation umschalten">
+        <span class="burger"></span><span class="burger"></span><span class="burger"></span>
+      </button>
+
+      <nav id="site-nav" class="site-nav">
+        <a href="#services">Dienstleistungen</a>
+        <a href="#cases">Fallstudien</a>
+        <a href="#about">Über Mich</a>
+        <a href="#courses">Kurse</a>
+        <a href="#resources">Ressourcen</a>
+        <a href="#contact" class="cta-nav">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO (colors/theme based on your current hero) -->
+    <section class="hero" aria-label="Hero">
+      <!-- Keep background video structure & IDs intact -->
+      <div id="bg-video" class="bg-video">
+        <video autoplay muted loop playsinline poster="assets/hero.png">
+          <source id="video-source" src="assets/space.mp4" type="video/mp4" />
+        </video>
+        <!-- Fallback image if no video -->
+        <div class="hero-fallback" role="img" aria-label="Futuristisches Raumschiff über Wüstenlandschaft"></div>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="container hero-content">
+        <h1>Ihr Geschäftspotenzial, <span class="accent">entfesselt durch KI.</span></h1>
+        <p class="lead">
+          Wir verbinden 20 Jahre Praxiserfahrung im Digital-Marketing mit intelligenten
+          Automationslösungen, um Ihre Effizienz zu steigern und Ihren Umsatz zu maximieren.
+        </p>
+        <div class="hero-ctas">
+          <!-- CTA must keep this exact id -->
+          <a id="see-whats-possible-btn" class="btn btn-accent" href="#contact">Kostenloses Strategiegespräch</a>
+          <a class="btn btn-ghost" href="#about">Was ist ein Futurenaut?</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pains to Vision -->
+    <section class="section" id="pains">
+      <div class="container">
+        <h2 class="section-title">Vom operativen Stress zur <span class="accent">skalierbaren Klarheit</span></h2>
+        <p class="section-intro">Ihre Engpässe werden zu Wettbewerbsvorteilen – mit sauberen Prozessen, greifbaren Kennzahlen und Automatisierung an den richtigen Stellen.</p>
+        <div class="grid cards-3 reveal-group">
+          <article class="card-glass reveal">
+            <h3>Problem: Aufgaben fressen Fokus</h3>
+            <p>Tickets, E-Mails, Copy-Paste – Ihr Team löscht Brände statt zu bauen. Wir automatisieren Routinen und schaffen Zeit für Wirkung.</p>
+          </article>
+          <article class="card-glass reveal">
+            <h3>Problem: Wissen steckt in Köpfen</h3>
+            <p>Daten und Dokumente sind verstreut. Wir strukturieren Wissen, machen es auffindbar und nutzbar – inklusive interner KI-Assistenz.</p>
+          </article>
+          <article class="card-glass reveal">
+            <h3>Problem: Chancen bleiben liegen</h3>
+            <p>Content ist zäh, Kampagnen sind langsam, Personalisierung skaliert nicht. Wir beschleunigen von Idee bis Live-Gang.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section" id="services">
+      <div class="container">
+        <h2 class="section-title">Dienstleistungen</h2>
+        <p class="section-intro">Von schnellen, wirksamen Automationen bis zur ganzheitlichen KI-Roadmap – exakt auf Ihr Geschäftsmodell zugeschnitten.</p>
+        <div class="grid cards-3 reveal-group">
+          <article class="card-glow reveal">
+            <h3>Marketing & Vertrieb – automatisiert</h3>
+            <p>Content-Pipelines, Lead-Qualifizierung, Follow-ups und Reporting – Ende-zu-Ende automatisiert, DSGVO-konform und KPI-geführt.</p>
+            <a href="#contact" class="link">Mehr erfahren →</a>
+          </article>
+          <article class="card-glow reveal">
+            <h3>Wissens- & Prozessmanagement</h3>
+            <p>Docs, SOPs und Tools in einer strukturierten Wissensbasis zusammenführen – ergänzt um einen internen KI-Chat für Sofortzugriff.</p>
+            <a href="#contact" class="link">Mehr erfahren →</a>
+          </article>
+          <article class="card-glow reveal">
+            <h3>KI-Strategie, Workshops & Begleitung</h3>
+            <p>Vom Audit über den Blueprint bis zur Integration. Schulungen für Teams und fortlaufende Optimierung inklusive.</p>
+            <a href="#contact" class="link">Mehr erfahren →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Method -->
+    <section class="section" id="method">
+      <div class="container">
+        <h2 class="section-title">Die Futurenaut-Methode</h2>
+        <p class="section-intro">In 4 Schritten von Analyse zu messbaren Ergebnissen.</p>
+        <div class="grid steps-4 reveal-group">
+          <article class="step reveal">
+            <span class="step-num">01</span>
+            <h3>Audit</h3>
+            <p>Prozesse, Tools, Datenflüsse: Wir identifizieren Quick-Wins und ROI-Hebel.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">02</span>
+            <h3>Blueprint</h3>
+            <p>Ihre individuelle KI-Roadmap – priorisiert, budgetiert, umsetzbar.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">03</span>
+            <h3>Build</h3>
+            <p>Implementierung & Integration in bestehende Systeme – pragmatisch statt akademisch.</p>
+          </article>
+          <article class="step reveal">
+            <span class="step-num">04</span>
+            <h3>Scale</h3>
+            <p>Messen, optimieren, skalieren – bis die Automationen sich selbst tragen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Us -->
+    <section class="section" id="why">
+      <div class="container">
+        <h2 class="section-title">Warum <span class="accent">Futurenaut</span>?</h2>
+        <div class="grid cards-4 reveal-group">
+          <article class="card-badge reveal">
+            <h3>20 Jahre Wachstums-DNA</h3>
+            <p>Erprobte Marketing- und Vertriebsmechanik statt Theorie.</p>
+          </article>
+          <article class="card-badge reveal">
+            <h3>Pragmatische KI</h3>
+            <p>Nur das, was heute Wert stiftet – klar, messbar, wartbar.</p>
+          </article>
+          <article class="card-badge reveal">
+            <h3>Unternehmer-Mindset</h3>
+            <p>Augenhöhe statt Beraterdeutsch. Fokus auf Ergebnis, nicht Output.</p>
+          </article>
+          <article class="card-badge reveal">
+            <h3>Zukunftssicher</h3>
+            <p>KI + Web3-Verständnis – damit Ihre Systeme morgen noch vorne liegen.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses / Workshops -->
+    <section class="section" id="courses">
+      <div class="container">
+        <h2 class="section-title">Kurse & Workshops</h2>
+        <div class="grid two-col">
+          <div>
+            <p class="section-intro">Akademisch fundiert, praxisnah umgesetzt: Von „0 auf 100“ – Grundlagen, Tooling, Prompts, Diffusions-Modelle & Business-Use-Cases. Ideal für Teams.</p>
+            <ul class="tick-list">
+              <li>Hands-on Sessions, Templates & Checklisten</li>
+              <li>Tool-agnostisch (Open-Source & Enterprise)</li>
+              <li>Live-Q&A und Aufzeichnungen</li>
+              <li>Deutsch & Englisch</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact">Workshop anfragen</a>
+          </div>
+          <div class="card-glass">
+            <h3>Beispiel-Module</h3>
+            <ol class="modules">
+              <li>Prompt-Strategien für Content & Ops</li>
+              <li>RAG-Pipelines & Wissensdatenbanken</li>
+              <li>Prozess-Automation (n8n, Make, APIs)</li>
+              <li>KI-Governance & Datenschutz</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources & FAQ -->
+    <section class="section" id="resources">
+      <div class="container">
+        <h2 class="section-title">Ressourcen & FAQ</h2>
+        <div class="grid two-col">
+          <div class="newsletter card-glass">
+            <h3>Newsletter</h3>
+            <p>Praktische Taktiken, Case-Notes und Vorlagen – maximal 1×/Woche.</p>
+            <form id="newsletter-form" aria-label="Newsletter anmelden">
+              <label class="visually-hidden" for="news-email">E-Mail</label>
+              <input id="news-email" type="email" placeholder="deine@email.de" required />
+              <button class="btn btn-accent" type="submit">Anmelden</button>
+            </form>
+            <p id="newsletter-msg" class="form-msg" role="status" aria-live="polite"></p>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>Wie starten wir?</summary>
+              <p>Mit einem kurzen Audit-Call. Wir identifizieren Quick-Wins und priorisieren die nächsten Schritte.</p>
+            </details>
+            <details>
+              <summary>Welche Tools nutzt ihr?</summary>
+              <p>Vendor-agnostisch. Wir wählen Tools nach Use-Case, Datenschutz und TCO – nicht nach Hype.</p>
+            </details>
+            <details>
+              <summary>Wie schnell sehe ich Ergebnisse?</summary>
+              <p>Erste Automationen typischerweise in 2–4 Wochen live. Ab dann kontinuierliche Optimierung.</p>
+            </details>
+            <details>
+              <summary>Braucht es Entwickler:innen?</summary>
+              <p>Nicht zwingend. Wo sinnvoll, integrieren wir Low-/No-Code mit sauberer Übergabe an Tech-Teams.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="section" id="cases">
+      <div class="container">
+        <h2 class="section-title">Kompetenz in Aktion</h2>
+        <div class="grid cards-2 reveal-group">
+          <article class="case-card reveal">
+            <div class="case-media"></div>
+            <div class="case-body">
+              <p class="kicker">E-Commerce Automatisierung</p>
+              <h3>75% weniger Content-Aufwand</h3>
+              <p>Produkttexte, Varianten, Alt-Texte, Meta-Daten als Pipeline: Qualität rauf, Time-to-Publish runter.</p>
+              <a href="#contact" class="link">Konzept ansehen →</a>
+            </div>
+          </article>
+          <article class="case-card reveal">
+            <div class="case-media"></div>
+            <div class="case-body">
+              <p class="kicker">Agentur-Effizienz</p>
+              <h3>Onboarding in 3 Tagen</h3>
+              <p>Interner KI-Chat auf Basis Ihrer Dokumente + SOP-Bibliothek: Antworten in Sekunden, weniger Rückfragen.</p>
+              <a href="#contact" class="link">Konzept ansehen →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title">Ihr Navigator für die <span class="accent">digitale Zukunft</span>.</h2>
+        <div class="grid two-col">
+          <div>
+            <p>Ich bin Wenzel Washington – Unternehmer seit 2004. Vom Affiliate-Marketing der frühen 2000er bis zu KI-getriebenen Growth-Systemen heute: Mein Fokus war immer derselbe – messbare Ergebnisse und nachhaltiges Wachstum.</p>
+            <p>Mein Ansatz ist radikal pragmatisch: klein starten, schnell liefern, skalieren, was funktioniert. Klarer Fokus auf Messbarkeit, Team-Enablement und saubere Prozesse.</p>
+          </div>
+          <div class="about-note card-glass">
+            <h3>Arbeitsprinzipien</h3>
+            <ul class="tick-list">
+              <li>Transparenz über Aufwand, Wirkung & Risiken</li>
+              <li>Datenschutz & Governance als Design-Kriterien</li>
+              <li>Enablement > Abhängigkeit</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title">Bereit für die erste <span class="accent">Abkürzung</span>?</h2>
+        <p class="section-intro">In 30 Minuten klären wir Ziele, Bottlenecks und die 1–2 Quick-Wins mit sofortigem ROI-Potenzial. Unverbindlich, konkret, umsetzbar.</p>
+        <form id="contact-form" class="contact-form card-glass" aria-label="Kontaktformular">
+          <div class="grid form-grid">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" required />
+            </label>
+            <label>
+              <span>E-Mail</span>
+              <input type="email" name="email" required />
+            </label>
+            <label class="full">
+              <span>Worum geht's?</span>
+              <select name="topic" required>
+                <option>Automatisierung</option>
+                <option>Generative KI (Bilder)</option>
+                <option>Chatbot KI</option>
+                <option>Workshop / Seminar</option>
+                <option>Modell-Finetuning</option>
+                <option>Allgemeine Beratung</option>
+              </select>
+            </label>
+            <label class="full">
+              <span>Nachricht</span>
+              <textarea name="message" rows="4" required></textarea>
+            </label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-accent">Anfrage senden</button>
+            <a class="btn btn-ghost" href="mailto:wenzel.srb@gmail.com">Oder per E-Mail</a>
+          </div>
+          <p id="contact-msg" class="form-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top">Futurenaut <span class="dot">.</span> co</a>
+        <p class="muted">Ihr Potenzial, entfesselt durch KI.</p>
+      </div>
+      <nav aria-label="Footer Navigation">
+        <a href="#services">Dienstleistungen</a>
+        <a href="#cases">Fallstudien</a>
+        <a href="#about">Über mich</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+      <div class="legal">
+        <small>© <span id="year"></span> Futurenaut.co – Alle Rechte vorbehalten.</small>
+        <div class="legal-links">
+          <a href="#impressum">Impressum</a>
+          <a href="#datenschutz">Datenschutz</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
