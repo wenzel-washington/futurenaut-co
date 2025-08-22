@@ -1,6 +1,7 @@
 name: Deploy to Droplet
 on:
-  push: { branches: [ "main" ] }
+  push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 env:
@@ -19,22 +20,20 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
 
-      - name: Trust host
+      - name: Trust host (known_hosts)
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
 
-      # --- DEBUG: prove what key is in the agent and in the secret ---
       - name: Show keys loaded in agent (fingerprints)
         run: |
           ssh-add -L | ssh-keygen -lf - || (echo "No keys in agent"; exit 1)
 
       - name: Fingerprint of DEPLOY_KEY secret (should match server)
+        shell: bash
         run: |
           umask 077
-          cat > id <<'KEY'
-${{ secrets.DEPLOY_KEY }}
-KEY
+          printf "%s" "${{ secrets.DEPLOY_KEY }}" > id
           ssh-keygen -y -f id > id.pub
           echo "DEPLOY_KEY fingerprint:"
           ssh-keygen -lf id.pub
@@ -43,7 +42,6 @@ KEY
       - name: SSH smoke test (very verbose)
         run: |
           ssh -vvv -o IdentitiesOnly=yes $USER@$HOST 'echo GH-SSH-OK && whoami'
-# ----- stop here once green; below are the real deploy steps -----
 
       - name: Rsync to _incoming (atomic)
         run: |
