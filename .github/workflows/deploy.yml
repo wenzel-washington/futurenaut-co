@@ -1,7 +1,6 @@
 name: Deploy to Droplet
 on:
-  push:
-    branches: [ "main" ]
+  push: { branches: [ "main" ] }
   workflow_dispatch:
 
 env:
@@ -39,15 +38,15 @@ jobs:
           ssh-keygen -lf id.pub
           rm -f id id.pub
 
-      - name: SSH smoke test (very verbose)
+      - name: SSH smoke test (verbose)
         run: |
-          ssh -vvv -o IdentitiesOnly=yes $USER@$HOST 'echo GH-SSH-OK && whoami'
+          ssh -vvv $USER@$HOST 'echo GH-SSH-OK && whoami'
 
       - name: Rsync to _incoming (atomic)
         run: |
           set -e
           RELEASE="release-${{ github.sha }}"
-          rsync -az --delete -e "ssh -o IdentitiesOnly=yes" \
+          rsync -az --delete \
             --exclude=".git" --exclude=".github" \
             ./ "$USER@$HOST:$PATH_ON_SERVER/_incoming/$RELEASE/"
 
@@ -55,7 +54,7 @@ jobs:
         run: |
           set -e
           RELEASE="release-${{ github.sha }}"
-          ssh -o IdentitiesOnly=yes $USER@$HOST "set -e
+          ssh $USER@$HOST "set -e
             mv $PATH_ON_SERVER/_incoming/$RELEASE $PATH_ON_SERVER/releases/$RELEASE
             ln -sfn $PATH_ON_SERVER/releases/$RELEASE $PATH_ON_SERVER/current
             sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx"
