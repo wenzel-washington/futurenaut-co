@@ -1,18 +1,35 @@
 name: Deploy to Droplet
+
 on:
-  push: { branches: [ "main" ] }
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - '**/*.md'
+      - '.github/**'
+      - 'scripts/**'
   workflow_dispatch:
+
+concurrency:
+  group: deploy-futurenaut
+  cancel-in-progress: true
 
 env:
   HOST: ${{ secrets.DEPLOY_HOST }}
   USER: ${{ secrets.DEPLOY_USER }}
   PATH_ON_SERVER: ${{ secrets.DEPLOY_PATH }}
 
+permissions:
+  contents: read
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      # Optional: build step (if you have one)
+      # - name: Build
+      #   run: echo "Build goes here"
 
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.9.0
@@ -23,10 +40,10 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
 
       - name: Show keys loaded in agent (fingerprints)
-        run: |
-          ssh-add -L | ssh-keygen -lf - || (echo "No keys in agent"; exit 1)
+        run: ssh-add -L | ssh-keygen -lf - || (echo "No keys in agent"; exit 1)
 
       - name: Fingerprint of DEPLOY_KEY secret (should match server)
         shell: bash
@@ -38,23 +55,38 @@ jobs:
           ssh-keygen -lf id.pub
           rm -f id id.pub
 
+      - name: Define release name (timestamp + short SHA)
+        run: echo "RELEASE=$(date -u +'%Y-%m-%d_%H%M%S')_${GITHUB_SHA::7}" >> $GITHUB_ENV
+
       - name: SSH smoke test (verbose)
+        run: ssh -vvv $USER@$HOST 'echo GH-SSH-OK && whoami'
+
+      - name: Ensure remote dirs and permissions
         run: |
-          ssh -vvv $USER@$HOST 'echo GH-SSH-OK && whoami'
+          ssh $USER@$HOST "set -e
+            sudo mkdir -p $PATH_ON_SERVER/{releases,_incoming}
+            sudo chown -R $USER:www-data $PATH_ON_SERVER
+            sudo chmod -R g+sw $PATH_ON_SERVER
+          "
 
       - name: Rsync to _incoming (atomic)
         run: |
-          set -e
-          RELEASE="release-${{ github.sha }}"
+          set -euo pipefail
           rsync -az --delete \
-            --exclude=".git" --exclude=".github" \
-            ./ "$USER@$HOST:$PATH_ON_SERVER/_incoming/$RELEASE/"
+            --exclude='.git' --exclude='.github' \
+            ./ "$USER@$HOST:$PATH_ON_SERVER/_incoming/${{ env.RELEASE }}/"
 
       - name: Flip symlink + reload Nginx
         run: |
-          set -e
-          RELEASE="release-${{ github.sha }}"
           ssh $USER@$HOST "set -e
-            mv $PATH_ON_SERVER/_incoming/$RELEASE $PATH_ON_SERVER/releases/$RELEASE
-            ln -sfn $PATH_ON_SERVER/releases/$RELEASE $PATH_ON_SERVER/current
-            sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx"
+            mv $PATH_ON_SERVER/_incoming/${{ env.RELEASE }} $PATH_ON_SERVER/releases/${{ env.RELEASE }}
+            ln -sfn $PATH_ON_SERVER/releases/${{ env.RELEASE }} $PATH_ON_SERVER/current
+            sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx
+          "
+
+      - name: Prune old releases (keep last 7)
+        run: |
+          ssh $USER@$HOST "set -e
+            cd $PATH_ON_SERVER/releases
+            ls -1t | tail -n +8 | xargs -r rm -rf --
+          "
