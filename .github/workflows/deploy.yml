@@ -13,27 +13,51 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Start SSH agent
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
       - name: Trust host
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
-      - name: SSH smoke test
-        run: ssh -o IdentitiesOnly=yes $USER@$HOST 'echo GH-SSH-OK && whoami'
-      - name: Rsync to _incoming
+
+      # --- DEBUG: prove what key is in the agent and in the secret ---
+      - name: Show keys loaded in agent (fingerprints)
+        run: |
+          ssh-add -L | ssh-keygen -lf - || (echo "No keys in agent"; exit 1)
+
+      - name: Fingerprint of DEPLOY_KEY secret (should match server)
+        run: |
+          umask 077
+          cat > id <<'KEY'
+${{ secrets.DEPLOY_KEY }}
+KEY
+          ssh-keygen -y -f id > id.pub
+          echo "DEPLOY_KEY fingerprint:"
+          ssh-keygen -lf id.pub
+          rm -f id id.pub
+
+      - name: SSH smoke test (very verbose)
+        run: |
+          ssh -vvv -o IdentitiesOnly=yes $USER@$HOST 'echo GH-SSH-OK && whoami'
+# ----- stop here once green; below are the real deploy steps -----
+
+      - name: Rsync to _incoming (atomic)
         run: |
           set -e
           RELEASE="release-${{ github.sha }}"
-          rsync -az --delete --exclude=".git" --exclude=".github" \
+          rsync -az --delete -e "ssh -o IdentitiesOnly=yes" \
+            --exclude=".git" --exclude=".github" \
             ./ "$USER@$HOST:$PATH_ON_SERVER/_incoming/$RELEASE/"
+
       - name: Flip symlink + reload Nginx
         run: |
           set -e
           RELEASE="release-${{ github.sha }}"
-          ssh $USER@$HOST "set -e
+          ssh -o IdentitiesOnly=yes $USER@$HOST "set -e
             mv $PATH_ON_SERVER/_incoming/$RELEASE $PATH_ON_SERVER/releases/$RELEASE
             ln -sfn $PATH_ON_SERVER/releases/$RELEASE $PATH_ON_SERVER/current
             sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx"
