@@ -1,19 +1,39 @@
 name: Deploy to Droplet
-
 on:
-  push:
-    branches: [ "main" ]
+  push: { branches: [ "main" ] }
+  workflow_dispatch:
+
+env:
+  HOST: ${{ secrets.DEPLOY_HOST }}
+  USER: ${{ secrets.DEPLOY_USER }}
+  PATH_ON_SERVER: ${{ secrets.DEPLOY_PATH }}
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
-        uses: appleboy/ssh-action@v1.0.0
+      - uses: actions/checkout@v4
+      - name: Start SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            bash /var/www/futurenaut.co/deploy.sh
-            sudo systemctl reload nginx
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+      - name: Trust host
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+      - name: SSH smoke test
+        run: ssh -o IdentitiesOnly=yes $USER@$HOST 'echo GH-SSH-OK && whoami'
+      - name: Rsync to _incoming
+        run: |
+          set -e
+          RELEASE="release-${{ github.sha }}"
+          rsync -az --delete --exclude=".git" --exclude=".github" \
+            ./ "$USER@$HOST:$PATH_ON_SERVER/_incoming/$RELEASE/"
+      - name: Flip symlink + reload Nginx
+        run: |
+          set -e
+          RELEASE="release-${{ github.sha }}"
+          ssh $USER@$HOST "set -e
+            mv $PATH_ON_SERVER/_incoming/$RELEASE $PATH_ON_SERVER/releases/$RELEASE
+            ln -sfn $PATH_ON_SERVER/releases/$RELEASE $PATH_ON_SERVER/current
+            sudo /usr/sbin/nginx -t && sudo /usr/bin/systemctl reload nginx"
