@@ -48,7 +48,7 @@ With the help of ChatGPT, I'm using a space exploration theme and gamification s
 - [X] Learned about server stats. Added monitoring tools.
 - [X] Updated start menu button in FutrenautOS.
 - [X] Added Docker, n8n, and https to server. Updated DNS of futurenaut.co
-- [X] 
+- [X] 26.08.25 // Atomic swap between landing page and dev page. Took me way too long.
 - [X] 
 
 ---
